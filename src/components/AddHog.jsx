@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+// receive onAddHog as a prop
 function AddNewHog({ onAddHog }) {
 	const [name, setName] = useState("");
 	const [specialty, setSpecialty] = useState("");
@@ -20,7 +21,7 @@ function AddNewHog({ onAddHog }) {
 			"highest medal achieved": highestMedalAchieved,
 			image,
 		};
-
+        // you are now using the onAddHog from the App to add a new Hog
 		onAddHog(newHog);  
 
 

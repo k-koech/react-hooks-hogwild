@@ -8,13 +8,14 @@ function App()
 	const [hogsData, setHogsData] = useState(hogs);
 	const [selectedHogName, setSelectedHogName] = useState(null);
 	const [greasedOnly, setGreasedOnly] = useState(false);
-	const [sortCriteria, setSortCriteria] = useState("name"); 
+	const [sortCriteria, setSortCriteria] = useState("name");  // pass name a default sort criteria
 
 	
-	// Filter hogs based on the `greasedOnly` state
+	// Filter hogs based on the greasedOnly state
 	const filteredHogs = greasedOnly ? hogsData.filter(hog => hog.greased) : hogsData;
 
-	// Sort hogs based on the selected `sortCriteria`
+	// Sort hogs based on the selected sortCriteria
+	// The spreading of array is not a must, you can remove it to
 	const sortedHogs = [...filteredHogs].sort((a, b) => {
 		if (sortCriteria === "name") {
 			return a.name.localeCompare(b.name);
@@ -26,6 +27,7 @@ function App()
 
 	// Add Hogs
 	const handleAddHog = (newHog) => {
+		// you first make a copy of the hogsData and then add a new data/But remember you are adding it the AddHogs page
 		setHogsData([...hogsData, { ...newHog, id: hogsData.length + 1 }]);
 	};
 
@@ -40,7 +42,7 @@ function App()
 				</label>
 			</div>
 
-            {/* Simple sort container */}
+            {/* Sort container*/}
 			<div>
 				<label>
 					Sort by: 
@@ -50,8 +52,8 @@ function App()
 					</select>
 				</label>
 			</div>
-
-
+           
+			{/* Display Data */}
 			{
 				sortedHogs && sortedHogs.map((hog)=>(
 					<div onClick={() => setSelectedHogName(hog.name)} className="pigTile" key={hog.id} style={{width:'20%', minHeight:'40vh'}}>
